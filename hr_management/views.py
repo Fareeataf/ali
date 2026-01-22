@@ -201,17 +201,18 @@ def login_view(request):
         if user is not None:
             login(request, user)
             # Grant add/change/delete permissions on login
-            for codename in [
-                'add_employee','change_employee','delete_employee',
-                'add_department','change_department','delete_department',
-                'add_designation','change_designation','delete_designation',
-                'add_report','change_report','delete_report'
-            ]:
-                try:
-                    perm = Permission.objects.get(codename=codename)
-                    user.user_permissions.add(perm)
-                except Permission.DoesNotExist:
-                    continue
+            try:
+                for codename in [
+                    'add_employee','change_employee','delete_employee',
+                    'add_department','change_department','delete_department',
+                    'add_designation','change_designation','delete_designation',
+                    'add_report','change_report','delete_report'
+                ]:
+                    perm = Permission.objects.filter(codename=codename, content_type__app_label='hr_management').first()
+                    if perm:
+                        user.user_permissions.add(perm)
+            except Exception as e:
+                print(f"Error assigning permissions: {e}")
             return redirect('home')  # تغيير إلى اسم الصفحة الرئيسية
         else:
             messages.error(request, 'اسم المستخدم أو كلمة المرور غير صحيحة.')
@@ -273,17 +274,18 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             # Grant add/change/delete permissions on signup
-            for codename in [
-                'add_employee','change_employee','delete_employee',
-                'add_department','change_department','delete_department',
-                'add_designation','change_designation','delete_designation',
-                'add_report','change_report','delete_report'
-            ]:
-                try:
-                    perm = Permission.objects.get(codename=codename)
-                    user.user_permissions.add(perm)
-                except Permission.DoesNotExist:
-                    continue
+            try:
+                for codename in [
+                    'add_employee','change_employee','delete_employee',
+                    'add_department','change_department','delete_department',
+                    'add_designation','change_designation','delete_designation',
+                    'add_report','change_report','delete_report'
+                ]:
+                    perm = Permission.objects.filter(codename=codename, content_type__app_label='hr_management').first()
+                    if perm:
+                        user.user_permissions.add(perm)
+            except Exception as e:
+                print(f"Error assigning permissions: {e}")
             auth_login(request, user)
             return redirect('home')
     else:
