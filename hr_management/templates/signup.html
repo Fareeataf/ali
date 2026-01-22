@@ -1,0 +1,110 @@
+{% load static %}
+{% comment %} {% extends "main.html" %} {% endcomment %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنشاء حساب</title>
+    <link rel="stylesheet" href="{% static 'assets/vendors/bootstrap-4.5.2/css/bootstrap.min.css' %}">
+    <style>
+        body {
+            background: linear-gradient(to right, rgb(151, 193, 234), rgb(3, 24, 47));
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            max-width: 600px; /* تحديد عرض ثابت */
+            margin-left: auto; /* توسيط العنصر */
+            margin-right: auto; /* توسيط العنصر */
+            margin-bottom: 50px;
+        }
+        h2 {
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+            color: #66ccff; /* لون العنوان */
+        }
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(4, 17, 31, 0.5);
+            transition: border-color 0.3s ease;
+        }
+        .form-control:focus {
+            background-color: rgba(255, 255, 255, 1);
+            border-color: #66ccff;
+            box-shadow: 0 0 5px rgba(0, 153, 255, 0.8);
+        }
+        .btn-primary {
+            background-color: rgb(4, 17, 31);
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            transform: scale(1.05); /* تأثير تكبير الزر */
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #ddd;
+        }
+        .alert {
+            margin-bottom: 20px;
+            background-color: rgba(255, 0, 0, 0.7);
+            border: none;
+        }
+        .form-group label {
+            float: right;
+            text-align: right;
+            width: 100%;
+        }
+        .form-control {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>إنشاء حساب جديد</h2>
+
+        {% if messages %}
+            <div class="alert alert-danger">
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="form-group">
+                <label class="font-weight-bold">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                    <div class="text-danger" style="text-align: right;">
+                        {% for error in field.errors %}
+                            <small>{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary btn-block">إنشاء حساب</button>
+        </form>
+        <p class="footer">لديك حساب بالفعل؟ <a href="{% url 'login' %}" style="color: #66ccff; text-decoration: underline;">تسجيل الدخول</a></p>
+    </div>
+    <script src="{% static 'assets/vendors/jquery/jquery-3.5.1.slim.min.js' %}"></script>
+    <script src="{% static 'assets/vendors/popperjs/popper.min.js' %}"></script>
+    <script src="{% static 'assets/vendors/bootstrap-4.5.2/js/bootstrap.min.js' %}"></script>
+</body>
+</html>
+{% endblock %}

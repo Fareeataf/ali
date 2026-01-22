@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول</title>
+    <link rel="stylesheet" href="{% static 'assets/vendors/bootstrap-4.5.2/css/bootstrap.min.css' %}">
+    <style>
+        body {
+            background: linear-gradient(to right, rgb(151, 193, 234), rgb(3, 24, 47));
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            margin-top: 100px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            max-width: 400px; /* تحديد عرض ثابت */
+            margin-left: auto; /* توسيط العنصر */
+            margin-right: auto; /* توسيط العنصر */
+        }
+        h2 {
+            text-align: center; /* توسيط العنوان */
+            margin-bottom: 20px;
+        }
+        .alert {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>تسجيل الدخول</h2>
+        
+        {% if messages %}
+            <div class="alert alert-danger">
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>اسم المستخدم</label>
+                <input type="text" name="username" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>كلمة المرور</label>
+                <input type="password" name="password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" id="login-button">تسجيل الدخول</button>
+        </form>
+        <p class="footer text-center">ليس لديك حساب؟ <a href="{% url 'signup' %}" style="color: #66ccff;">إنشاء حساب جديد</a></p>
+    </div>
+
+    <script src="{% static 'assets/vendors/jquery/jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'assets/vendors/popperjs/popper.min.js' %}"></script>
+    <script src="{% static 'assets/vendors/bootstrap-4.5.2/js/bootstrap.min.js' %}"></script>
+    <script>
+        // تأثير بسيط عند الضغط على زر تسجيل الدخول
+        document.getElementById('login-button').addEventListener('click', function() {
+            this.classList.add('disabled'); // تعطيل الزر بعد الضغط
+            this.innerHTML = 'جاري تسجيل الدخول...'; // تغيير نص الزر
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+<div class="main-content container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Manage Working</h3>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class='breadcrumb-header'>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-success">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Manage Working</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <section class="section">
+        <div class="card">
+            <div class="card-body">
+                <table class='table' id="table1">
+                    <thead>
+                        <tr>
+                            <th>Working ID</th>
+                            <th>Full Name</th>
+                            <th>Department</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Hire Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       {% for x in employees %}
+                        <tr>
+                            <td>{{ x.ID }}</td>
+                            <td>{{ x.first_name }} {{ x.last_name }}</td>
+                            <td>{{ x.department }}</td>
+                            <td>{{ x.email }}</td>
+                            <td>
+                                {% if x.status %}
+                                    <span class="badge bg-success">Active</span>
+                                {% else %}
+                                    <span class="badge bg-danger">Inactive</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ x.hire_date|date:"Y-m-d" }}</td>
+                            <td>
+                                <a href="{% url 'edit_employee' id=x.ID %}" class="btn btn-primary btn-sm">تعديل</a>
+                                <a href="{% url 'delete_employee' id=x.ID %}" class="btn btn-danger btn-sm" 
+                                   onclick="return confirm('هل أنت متأكد من حذف هذا الموظف؟');">حذف</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}

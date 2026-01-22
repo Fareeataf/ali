@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Employee Leave Management System</title>
+      <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+      <script defer src="{% static 'assets/fontawesome/js/all.min.js' %}"></script>
+      <link rel="stylesheet" href="{% static 'assets/vendors/chartjs/Chart.min.css' %}">
+      <link rel="stylesheet" href="{% static 'assets/vendors/perfect-scrollbar/perfect-scrollbar.css' %}">
+      <link rel="stylesheet" href="{% static 'assets/css/app.css' %}">
+      <style type="text/css">
+        .notif:hover{
+          background-color: rgba(0, 0, 0, 0.88);
+          
+                  }
+      </style>
+   </head>
+   <body>
+      <div id="app">
+        {% include "sidebar.html" %}
+        <div id="main">
+            {% include "navbar.html" %}
+            {% block content %}
+
+
+                {% endblock  %}
+
+
+            </div>
+        </div>
+        <script src="{% static 'assets/js/feather-icons/feather.min.js' %}"></script>
+        <script src="{% static 'assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+        <script src="{% static 'assets/js/app.js' %}"></script>
+        <script src="{% static 'assets/vendors/chartjs/Chart.min.js' %}"></script>
+        <script src="{% static 'assets/vendors/apexcharts/apexcharts.min.js' %}"></script>
+        <script src="{% static 'assets/js/pages/dashboard.js' %}"></script>
+        <script src="{% static 'assets/js/main.js' %}"></script>
+     </body>
+  </html>
+
+
+
+
+
+

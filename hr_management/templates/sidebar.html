@@ -1,0 +1,161 @@
+<style>
+    /* تصميم الشريط الجانبي */
+    #sidebar {
+        background-color: #f8f9fa; /* لون خلفية فاتح */
+        color: #343a40; /* لون النص داكن */
+        width: 250px; /* عرض الشريط الجانبي */
+        transition: all 0.3s; /* تأثير الانتقال */
+    }
+
+    .sidebar-header {
+        padding: 15px;
+        font-size: 20px; /* حجم خط أكبر */
+        background-color:rgb(143, 202, 235); /* لون خلفية رأس الشريط */
+        display: flex;
+        align-items: center;
+        color:rgb(10, 8, 8); /* لون النص في الرأس أبيض */
+    }
+
+    .sidebar-header i {
+        font-size: 24px; /* حجم الأيقونة أكبر */
+    }
+
+    .sidebar-menu .menu {
+        list-style: none;
+        padding: 0;
+    }
+
+    .sidebar-item {
+        position: relative;
+    }
+
+    .sidebar-item a {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        color: #343a40; /* لون النص داكن */
+        text-decoration: none;
+        transition: background-color 0.2s, color 0.2s; /* إضافة تأثير على اللون */
+    }
+
+    .sidebar-item a:hover {
+        background-color: #007bff; /* لون عند التمرير */
+        color: #ffffff; /* لون النص عند التمرير */
+    }
+
+    .sidebar-item.active a {
+        background-color: #0069d9; /* لون الخلفية للعناصر النشطة */
+        color: #ffffff; /* لون النص للعناصر النشطة */
+    }
+
+    .submenu {
+        display: none; /* إخفاء القائمة الفرعية */
+        background-color: #e9ecef; /* لون خلفية القائمة الفرعية */
+    }
+
+    .submenu li a {
+        padding: 10px 30px; /* إضافة هوامش للقائمة الفرعية */
+        color:rgb(107, 136, 165); /* لون النص للقائمة الفرعية */
+    }
+
+    .submenu li a:hover {
+        background-color:rgb(169, 194, 222); /* لون عند التمرير على القائمة الفرعية */
+        color: #ffffff; /* لون النص عند التمرير على القائمة الفرعية */
+    }
+
+    .sidebar-toggler {
+        position: absolute;
+        bottom: 20px;
+        left: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 15px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .sidebar-toggler:hover {
+        background-color: #0056b3; /* لون عند التمرير على الزر */
+    }
+</style>
+
+<div id="sidebar" class='active'>
+   <div class="sidebar-wrapper active">
+       <div class="sidebar-header">
+           <i class="fa fa-users"></i>
+           <span>Colleg</span>
+       </div>
+       <div class="sidebar-menu">
+           <ul class="menu">
+               <li class="sidebar-item active">
+                   <a href="{% url 'home' %}" class='sidebar-link'>
+                       <i class="fa fa-home"></i>
+                       <span>Dashboard</span>
+                   </a>
+               </li>
+               <li class="sidebar-item has-sub">
+                   <a href="#" class='sidebar-link'>
+                       <i class="fa fa-th-large"></i>
+                       <span>Sections</span>
+                   </a>
+                   <ul class="submenu">
+                       <li>
+                           <a href="{% url 'add_dept' %}">Add Section</a>
+                       </li>
+                       <li>
+                           <a href="{% url 'manage' %}">Manage Section</a>
+                       </li>
+                   </ul>
+               </li>
+               <li class="sidebar-item has-sub">
+                   <a href="#" class='sidebar-link'>
+                       <i class="fa fa-tasks"></i>
+                       <span>Assignments</span>
+                   </a>
+                   <ul class="submenu">
+                       <li>
+                           <a href="{% url 'add_designation' %}">Add Assignment</a>
+                       </li>
+                       <li>
+                           <a href="{% url 'manage_designation' %}">Manage Assignment</a>
+                       </li>
+                   </ul>
+               </li>
+               <li class="sidebar-item has-sub">
+                   <a href="#" class='sidebar-link'>
+                       <i class="fa fa-users-cog"></i>
+                       <span>Working</span>
+                   </a>
+                   <ul class="submenu">
+                       <li>
+                           <a href="{% url 'add_emp' %}">Add Working</a>
+                       </li>
+                       <li>
+                           <a href="{% url 'manage_employee' %}">Manage Working</a>
+                       </li>
+                   </ul>
+               </li>
+               <li class="sidebar-item">
+                   <a href="{% url 'report_list' %}" class='sidebar-link'>
+                       <i class="fa fa-chart-line"></i>
+                       <span>Reports</span>
+                   </a>
+               </li>
+           </ul>
+       </div>
+       <button class="sidebar-toggler btn x"><i class="fa fa-times"></i></button>
+   </div>
+</div>
+
+<script>
+    // مثال على تحسينات باستخدام JavaScript
+    document.querySelectorAll('.sidebar-item.has-sub > a').forEach(item => {
+        item.addEventListener('click', function (e) {
+            e.preventDefault(); // منع الانتقال الفوري
+            const submenu = this.nextElementSibling;
+            submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+        });
+    });
+</script>

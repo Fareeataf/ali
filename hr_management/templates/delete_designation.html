@@ -1,0 +1,47 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+<div class="main-content container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>حذف التسمية</h3>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class='breadcrumb-header'>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-success">الصفحة الرئيسية</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">حذف التسمية</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Basic Vertical form layout section start -->
+    <section id="basic-vertical-layouts">
+        <div class="row match-height">
+            <div class="col-md-8 col-12">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-body">
+                            <h3>هل أنت متأكد أنك تريد حذف هذه التسمية؟</h3>
+                            <h4>{{ designation.name }}</h4> <!-- عرض اسم التسمية -->
+                            <form class="form form-vertical" method="post" action="{% url 'delete_designation' designation.pk %}">
+                                {% csrf_token %}
+                                <div class="col-12 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-danger me-1 mb-1">نعم، احذفها</button>
+                                    <a href="{% url 'manage_designation' %}" class="btn btn-secondary">إلغاء</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- // Basic Vertical form layout section end -->
+</div>
+
+{% endblock %}

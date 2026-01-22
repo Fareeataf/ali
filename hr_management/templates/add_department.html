@@ -1,0 +1,73 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+<div class="main-content container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Add Sections</h3>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class='breadcrumb-header'>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-success">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Add Sections</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Basic Vertical form layout section start -->
+    <section id="basic-vertical-layouts">
+    <div class="row match-height">
+        <div class="col-md-8 col-12">
+        <div class="card">
+            <div class="card-content">
+            <div class="card-body">
+                <form class="form form-vertical" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                {% comment %} <div class="form-body">
+                    <div class="row">
+                    <div class="col-12">
+                        <div class="form-group has-icon-left">
+                            <label for="name">Department Short Name</label>
+                            <div class="position-relative">
+                                <input type="text" class="form-control" placeholder="Input Department" id="first-name-icon" name="name">
+                                <div class="form-control-icon">
+                                    <i class="fa fa-table"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group has-icon-left">
+                            <label for="description">Department Name</label>
+                            <div class="position-relative">
+                                <input type="text" class="form-control" placeholder="Input Department Name" id="email-id-icon" name="description">
+                                <div class="form-control-icon">
+                                    <i class="fa fa-table"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                    </div> {% endcomment %}
+                    {% comment %} </div>
+                </div> {% endcomment %}
+                </form>
+            {% comment %} </div>
+            </div>
+        </div>
+        </div>
+    </div> {% endcomment %}
+    </section>
+    <!-- // Basic Vertical form layout section end -->
+</div>
+{% endblock %}
