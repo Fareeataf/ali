@@ -29,11 +29,17 @@ DEBUG = os.getenv("DEBUG", "False") == "True"
 
 
 ALLOWED_HOSTS = ['*']
-
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-if RENDER_EXTERNAL_HOSTNAME:
-    CSRF_TRUSTED_ORIGINS = ['https://' + RENDER_EXTERNAL_HOSTNAME]
+RAILWAY_STATIC_URL = os.environ.get('RAILWAY_STATIC_URL')  # متغير جديد في Railway
 
+# CSRF Trusted Origins
+CSRF_TRUSTED_ORIGINS = []
+
+if RENDER_EXTERNAL_HOSTNAME:
+    CSRF_TRUSTED_ORIGINS.append('https://' + RENDER_EXTERNAL_HOSTNAME)
+
+if RAILWAY_STATIC_URL:
+    CSRF_TRUSTED_ORIGINS.append('https://*.railway.app')
 
 # Application definition
 
