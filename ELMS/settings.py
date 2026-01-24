@@ -27,12 +27,11 @@ SECRET_KEY = 'django-insecure-q1@ca&8^yegur3-9ua0#)yev@2r5ww!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
-
 ALLOWED_HOSTS = ['*']
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-RAILWAY_STATIC_URL = os.environ.get('RAILWAY_STATIC_URL')  # متغير جديد في Railway
 
-# CSRF Trusted Origins
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+RAILWAY_STATIC_URL = os.environ.get('RAILWAY_STATIC_URL')
+
 CSRF_TRUSTED_ORIGINS = []
 
 if RENDER_EXTERNAL_HOSTNAME:
@@ -40,6 +39,10 @@ if RENDER_EXTERNAL_HOSTNAME:
 
 if RAILWAY_STATIC_URL:
     CSRF_TRUSTED_ORIGINS.append('https://*.railway.app')
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 # Application definition
 
